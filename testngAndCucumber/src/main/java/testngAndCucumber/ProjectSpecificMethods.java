@@ -17,8 +17,8 @@ import io.github.sukgu.Shadow;
 
 public class ProjectSpecificMethods {
 
-ChromeDriver driver;
-Shadow shadow;
+public static ChromeDriver driver;
+public static Shadow shadow;
 public static String text2="";
 
 @Parameters({"url","username","password"})
