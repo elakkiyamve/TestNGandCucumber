@@ -18,7 +18,7 @@ import io.github.sukgu.Shadow;
 public class ProjectSpecificMethods {
 
 ChromeDriver driver;
-Shadow shadow = new Shadow(driver);
+Shadow shadow;
 public static String text2="";
 
 @Parameters({"url","username","password"})
@@ -33,7 +33,7 @@ public void setup(String url,String username, String password) throws Interrupte
 			//maximize
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-	
+			shadow = new Shadow(driver);
 			//find the username and enter the value
 			driver.findElement(By.id("user_name")).sendKeys(username);
 			//find the password and enter the value
@@ -45,7 +45,7 @@ public void setup(String url,String username, String password) throws Interrupte
 			shadow.findElementByXPath("//div[@id='all']").click();
 			Thread.sleep(2000);
 			shadow.findElementByXPath("//span[text()='Incidents']").click();
-			System.out.println("completed before method");
+			
 }
 	
 @AfterClass
