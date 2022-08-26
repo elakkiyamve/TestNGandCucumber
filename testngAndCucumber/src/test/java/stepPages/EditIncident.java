@@ -1,9 +1,14 @@
 package stepPages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,9 +18,15 @@ import io.github.sukgu.Shadow;
 
 public class EditIncident extends ProjectSpecificMethods{
 	
+	
+	public EditIncident() {
+		super();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	}
+
 	@Given ("Search existing incident number to edit")
 	public void searchIncidentNum() {
-		shadow.setImplicitWait(20);
+		
 		WebElement eleFrame= shadow.findElementByXPath(("//iframe[@title='Main Content']"));
 		driver.switchTo().frame(eleFrame);
 		driver.findElement(By.xpath("(//input[@class='form-control'])[1]")).sendKeys(text2,Keys.ENTER);
@@ -34,19 +45,21 @@ public class EditIncident extends ProjectSpecificMethods{
 
 	@And ("select Urgency and select (.*)$")
 	public void selectUrgency(String Urgency) {
+		
 		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
 		dd.click();
 		WebElement option = driver.findElement(By.xpath("//option[text()='"+Urgency+"']"));
-		action = new Actions(driver);
-		action.moveToElement(option).click().build().perform();	
+		option.click();
 	}
+	
 	@And ("select State and select (.*)$")
 	public void selectState(String State) {
+		
 		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
 		dd2.click();
-		WebElement option = driver.findElement(By.xpath("//option[text()='"+State+"']"));
-		action = new Actions(driver);
-		action.moveToElement(option).click().build().perform();
+		WebElement option1 = driver.findElement(By.xpath("//option[text()='"+State+"']"));
+		option1.click();
+		
 	}
 	@And ("enter Short description as (.*)$")
 	public void enterShortDesc(String ShortDescription) {
@@ -56,8 +69,9 @@ public class EditIncident extends ProjectSpecificMethods{
 	}
 	@Then ("click Update")
 	public void clickUpdate() throws InterruptedException {
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//button[text()='Update']")).click();
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//button[text()='Update']")).click();	
 	}
 	
 }
