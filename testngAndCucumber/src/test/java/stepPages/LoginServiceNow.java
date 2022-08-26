@@ -11,7 +11,6 @@ import io.github.sukgu.Shadow;
 
 public class LoginServiceNow extends ProjectSpecificMethods{
 
-	Shadow shadow = new Shadow(driver);
 	
 	@Given("Enter the username as (.*)$")
 	public void typeUserName(String username) {
@@ -35,6 +34,7 @@ public class LoginServiceNow extends ProjectSpecificMethods{
 	
 	@Given("Click All Link")
 	public void clickAllLink() {
+		shadow = new Shadow(driver);
 		shadow.setImplicitWait(20);
 		shadow.findElementByXPath("//div[@id='all']").click();
 	}
