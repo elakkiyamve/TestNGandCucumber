@@ -35,14 +35,14 @@ public class EditIncident extends ProjectSpecificMethods {
 		eleCallerID.clear();
 		eleCallerID.sendKeys("Abel Tuter",Keys.TAB);
 		//select urgency
-		WebElement dd = driver.findElement(By.id("incident.urgency"));
+		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
 		Select s1 =new Select(dd);
-		s1.selectByIndex(1);
+		s1.selectByVisibleText("1-High");
 		
 		//select state
-		WebElement dd2 = driver.findElement(By.id("incident.state"));
+		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
 		Select s2 =new Select(dd2);
-		s2.selectByIndex(2);
+		s2.selectByVisibleText("In Progress");
 		
 		//enter description
 		WebElement eleShortDesc = driver.findElement(By.id("incident.short_description"));
@@ -50,7 +50,7 @@ public class EditIncident extends ProjectSpecificMethods {
 		eleShortDesc.sendKeys("edited via automation");
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[text()='Update']")).click();	//click update
-		
+		Thread.sleep(2000);
 		//6. Verify the update information is available in the incident
 		
 	}
