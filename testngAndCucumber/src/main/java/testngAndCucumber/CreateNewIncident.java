@@ -27,8 +27,6 @@ public class CreateNewIncident extends ProjectSpecificMethods{
 	
 	@Test(dataProvider = "create")
 	public void CreateIncident(String desc) {
-		String all = "return document.querySelector('body > macroponent-f51912f4c700201072b211d4d8c26010').shadowRoot.querySelector('div > sn-canvas-appshell-root > sn-canvas-appshell-layout > sn-polaris-layout').shadowRoot.querySelector('div.sn-polaris-layout.polaris-enabled > div.header-bar > sn-polaris-header').shadowRoot.querySelector('/'all')";
-		shadow.findElementByXPath(all).click();
 			
 		//5. Click on Create new option and fill the mandatory fields
 		WebElement eleFrame= shadow.findElementByXPath(("//iframe[@title='Main Content']"));
