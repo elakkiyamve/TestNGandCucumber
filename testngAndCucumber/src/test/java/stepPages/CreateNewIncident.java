@@ -13,15 +13,13 @@ import testngAndCucumber.ScenarioContext;
 
 public class CreateNewIncident extends ProjectSpecificMethods{
 
-	Shadow shadow = new Shadow(driver);
-	
 	@Given("Click New")
 	public void clickNew() {
 		WebElement eleFrame= shadow.findElementByXPath(("//iframe[@title='Main Content']"));
 		driver.switchTo().frame(eleFrame);
 		driver.findElement(By.xpath("//button[text()='New']")).click();
 		text2 = driver.findElement(By.xpath("//input[@id='incident.number']")).getAttribute("value");
-		System.out.println("Inident NUmber"+text2);
+		System.out.println("Incident NUmber"+text2);
 	} 
 	
 	@When("Type the short_description as (.*)$")
