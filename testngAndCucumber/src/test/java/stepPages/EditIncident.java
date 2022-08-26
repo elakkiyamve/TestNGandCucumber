@@ -12,7 +12,6 @@ import io.cucumber.java.en.When;
 import io.github.sukgu.Shadow;
 
 public class EditIncident extends ProjectSpecificMethods{
-	Shadow shadow = new Shadow(driver);
 	
 	@Given ("Search existing incident number to edit")
 	public void searchIncidentNum() {
@@ -35,15 +34,15 @@ public class EditIncident extends ProjectSpecificMethods{
 
 	@And ("select Urgency and select (.*)$")
 	public void selectUrgency(String Urgency) {
-		WebElement dd = driver.findElement(By.id("incident.urgency"));
+		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
 		Select s1 =new Select(dd);
-		s1.selectByIndex(2);	
+		s1.selectByVisibleText(Urgency);	
 	}
 	@And ("select State and select (.*)$")
 	public void selectState(String State) {
-		WebElement dd2 = driver.findElement(By.id("incident.state"));
+		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
 		Select s2 =new Select(dd2);
-		s2.selectByValue(State);
+		s2.selectByVisibleText(State);
 	}
 	@And ("enter Short description as (.*)$")
 	public void enterShortDesc(String ShortDescription) {
