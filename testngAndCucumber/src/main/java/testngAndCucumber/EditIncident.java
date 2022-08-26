@@ -24,7 +24,7 @@ public class EditIncident extends ProjectSpecificMethods {
 	
 	@Test
 	public void editIncident(String editedDesc, String callerId, String State, String Urgency) throws InterruptedException {
-		
+		Actions action;
 		WebElement eleFrame= shadow.findElementByXPath(("//iframe[@title='Main Content']"));
 		driver.switchTo().frame(eleFrame);
 		
@@ -38,17 +38,17 @@ public class EditIncident extends ProjectSpecificMethods {
 		eleCallerID.sendKeys(callerId,Keys.TAB);
 		//select urgency
 		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
-		WebElement option = driver.findElement(By.id("//option[text()='"+Urgency+"']"));
 		dd.click();
+		WebElement option = driver.findElement(By.xpath("//option[text()='"+Urgency+"']"));
 		action = new Actions(driver);
 		action.moveToElement(option).click().build().perform();
 		
 		//select state
-		WebElement dd2 = driver.findElement(By.id("//select[@id='incident.state']"));
-		WebElement option = driver.findElement(By.id("//option[text()='"+State+"']"));
+		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
 		dd2.click();
+		WebElement option1 = driver.findElement(By.xpath("//option[text()='"+State+"']"));
 		action = new Actions(driver);
-		action.moveToElement(option).click().build().perform();
+		action.moveToElement(option1).click().build().perform();
 		
 		//enter description
 		WebElement eleShortDesc = driver.findElement(By.id("incident.short_description"));
