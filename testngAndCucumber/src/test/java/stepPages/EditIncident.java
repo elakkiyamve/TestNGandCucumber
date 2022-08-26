@@ -35,14 +35,18 @@ public class EditIncident extends ProjectSpecificMethods{
 	@And ("select Urgency and select (.*)$")
 	public void selectUrgency(String Urgency) {
 		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
-		Select s1 =new Select(dd);
-		s1.selectByVisibleText(Urgency);	
+		WebElement option = driver.findElement(By.id("//option[text()='"+Urgency+"']"));
+		dd.click();
+		action = new Actions(driver);
+		action.moveToElement(option).click().build().perform();	
 	}
 	@And ("select State and select (.*)$")
 	public void selectState(String State) {
-		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
-		Select s2 =new Select(dd2);
-		s2.selectByVisibleText(State);
+		WebElement dd2 = driver.findElement(By.id("//select[@id='incident.state']"));
+		WebElement option = driver.findElement(By.id("//option[text()='"+State+"']"));
+		dd2.click();
+		action = new Actions(driver);
+		action.moveToElement(option).click().build().perform();
 	}
 	@And ("enter Short description as (.*)$")
 	public void enterShortDesc(String ShortDescription) {
