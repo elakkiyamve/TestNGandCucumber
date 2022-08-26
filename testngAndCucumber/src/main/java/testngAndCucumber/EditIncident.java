@@ -8,21 +8,23 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class EditIncident extends ProjectSpecificMethods {
-	/*
+	
 	@DataProvider(name="edit")
 	public String[] fetchData() {
 		
-		String[] data = new String [2];
+		String[] data = new String [4];
 		//1st data
 		data[0]="Edited Via Automation";
 		data[1]="Abel Tuter";
+		data[2]="In Progress";
+		data[3]="1-High";
 		
 		return data;
 	}
-	*/
+	
 	@Test
-	public void editIncident() throws InterruptedException {
-		System.out.println("entered test");
+	public void editIncident(String editedDesc, String callerId, String State, String Urgency) throws InterruptedException {
+		
 		WebElement eleFrame= shadow.findElementByXPath(("//iframe[@title='Main Content']"));
 		driver.switchTo().frame(eleFrame);
 		
@@ -33,21 +35,25 @@ public class EditIncident extends ProjectSpecificMethods {
 		//5. Update the incident with Urgency as High and State as In Progress
 		WebElement eleCallerID = driver.findElement(By.id("sys_display.incident.caller_id"));
 		eleCallerID.clear();
-		eleCallerID.sendKeys("Abel Tuter",Keys.TAB);
+		eleCallerID.sendKeys(callerId,Keys.TAB);
 		//select urgency
 		WebElement dd = driver.findElement(By.xpath("//select[@id='incident.urgency']"));
-		Select s1 =new Select(dd);
-		s1.selectByVisibleText("1-High");
+		WebElement option = driver.findElement(By.id("//option[text()='"+Urgency+"']"));
+		dd.click();
+		action = new Actions(driver);
+		action.moveToElement(option).click().build().perform();
 		
 		//select state
-		WebElement dd2 = driver.findElement(By.xpath("//select[@id='incident.state']"));
-		Select s2 =new Select(dd2);
-		s2.selectByVisibleText("In Progress");
+		WebElement dd2 = driver.findElement(By.id("//select[@id='incident.state']"));
+		WebElement option = driver.findElement(By.id("//option[text()='"+State+"']"));
+		dd2.click();
+		action = new Actions(driver);
+		action.moveToElement(option).click().build().perform();
 		
 		//enter description
 		WebElement eleShortDesc = driver.findElement(By.id("incident.short_description"));
 		eleShortDesc.clear();
-		eleShortDesc.sendKeys("edited via automation");
+		eleShortDesc.sendKeys(editedDesc);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//button[text()='Update']")).click();	//click update
 		Thread.sleep(2000);
