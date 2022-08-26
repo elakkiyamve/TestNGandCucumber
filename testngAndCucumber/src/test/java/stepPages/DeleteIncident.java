@@ -12,7 +12,6 @@ import io.cucumber.java.en.When;
 import io.github.sukgu.Shadow;
 
 public class DeleteIncident extends ProjectSpecificMethods {
-	Shadow shadow = new Shadow(driver);
 	
 	@Given("Enter Incident number in search box")
 	public void searchIncident()
